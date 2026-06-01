@@ -19,3 +19,5 @@ export default function Blogs() {
     </div>
   );
 }
+//this forces next.js to refresh data every time the page is visited
+export const dynamic = 'force-dynamic'
