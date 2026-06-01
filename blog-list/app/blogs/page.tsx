@@ -6,7 +6,9 @@ export default function Blogs() {
     <div>
       <h1>Blogs List</h1>
       <ul>
-        {blogs.map((blog) => (
+        {blogs
+          .toSorted((a, b) => b.likes - a.likes)
+          .map((blog) => (
           <li key={blog.id}>
             <Link href={`/blogs/${blog.id}`}>
               {" "}
