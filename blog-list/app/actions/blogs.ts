@@ -13,7 +13,10 @@ export const createBlog = async( formData :FormData) => {
 }
 
 export const increaseLikes = async(formData: FormData) => {
-    const {id} = Number(formData.get('id'))
+    const id = Number(formData.get('id'))
+    if (isNaN(id)) {
+        throw new Error("Invalid ID provided");
+    }
     await updateBlog(id)
     revalidatePath(`/blogs/${id}`);
     revalidatePath('/blogs');
