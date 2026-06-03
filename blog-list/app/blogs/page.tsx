@@ -6,17 +6,10 @@ export default async function Blogs({
 }: {
   searchParams: Promise<{ filter?: string }>;
 }) {
-  const { filter } = await searchParams;
-  console.log(filter);
+  const  {filter}  = await searchParams;
+  
 
-  const allBlogs = getBlogs();
-  const blogs =
-    filter !== undefined
-      ? allBlogs.filter((blog) =>
-          blog.title.toLowerCase().includes(filter.toLowerCase()),
-        )
-      : allBlogs;
-
+  const blogs = await getBlogs(filter);
   return (
     <div>
       <h1>Blogs List</h1>
@@ -30,7 +23,7 @@ export default async function Blogs({
       <Link href="/blogs">Clear the search</Link>
       {blogs.length === 0 ? (
         <div>
-          <h2>No blogs found matching your filter {filter}</h2>
+          <h2>No blogs found matching your filter {filter || "None"}</h2>
         </div>
       ) : (
         <ul>
