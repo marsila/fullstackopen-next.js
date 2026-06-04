@@ -8,6 +8,13 @@
       "when": 1780478249530,
       "tag": "0000_perpetual_fabian_cortez",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1780577446245,
+      "tag": "0001_chief_doorman",
+      "breakpoints": true
     }
   ]
 }

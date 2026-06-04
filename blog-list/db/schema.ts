@@ -6,4 +6,11 @@ export const blogs = pgTable("blogs",{
     author:text('author').notNull(),
     url:text('url').notNull(),
     likes: integer('likes').notNull().default(0),
+    userId:integer('user_id').references(()=> users.id)
+})
+
+export const users = pgTable('users',{
+    id:serial('id').primaryKey(),
+    name:text('name').notNull(),
+    username:text('username').notNull().unique(),
 })
