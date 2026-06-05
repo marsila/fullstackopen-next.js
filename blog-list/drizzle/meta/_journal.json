@@ -15,6 +15,13 @@
       "when": 1780577446245,
       "tag": "0001_chief_doorman",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1780610358968,
+      "tag": "0002_fast_deadpool",
+      "breakpoints": true
     }
   ]
 }
