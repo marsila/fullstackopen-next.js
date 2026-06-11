@@ -4,23 +4,38 @@ import { revalidatePath } from 'next/cache'
 import { addBlog, updateBlog } from '../services/blogs'
 import { auth } from '../auth'
 
-export const createBlog = async( prevState: {error:string},formData :FormData) => {
+export type BlogFormState = {
+    errors:{
+        title:string;
+        author:string;
+        url:string;
+    };
+    values:{
+        title:string;
+        author:string;
+        url:string;
+    }
+}
+export const createBlog = async( prevState: BlogFormState,formData :FormData) => {
     const session = await auth()
     if(!session){
         return redirect('/login')
     }
     const title = formData.get('title') as string
-    if(!title || title.length < 5){
-        return{error : "Title must be at least 5 character long"}
-    }
     const author = formData.get('author') as string
-    if(!author || author.length < 5){
-        return{error : "Author must be at least 5 character long"}
-    }
     const url = formData.get('url') as string
-    if(!url || url.length < 5){
-        return{error : "URL must be at least 5 character long"}
+    const errors: BlogFormState['errors'] = {};
+
+    if(!title || title.length < 5){errors.title = "Title must be at least 5 character long"}
+    
+    if(!author || author.length < 5){errors.author = "Author must be at least 5 character long"}
+    
+    if(!url || url.length < 5){errors.url ="URL must be at least 5 character long"}
+
+    if(Object.keys(errors).length>0){
+        return{errors,values:{title,author,url}}
     }
+
     await addBlog(title,author,url)
     revalidatePath('/blogs')
     redirect('/blogs')
