@@ -17,11 +17,15 @@ export default function NavBar() {
         <>
           <Link href="/blogs/new">Create Blog</Link>
           {" | "}
-          <em>{session.user?.name} logged in</em>
-          <button onClick={() => signOut()}>logout</button>
+          <em>{session.user?.name} Logged in</em>
+          <button onClick={() => signOut()}>Logout</button>
         </>
       ) : (
-        <Link href="/login">login</Link>
+        <>
+        <Link href="/login">Login</Link>
+        {' | '}
+        <Link href="/register">Register</Link>
+        </>
       )}
     </nav>
   );
