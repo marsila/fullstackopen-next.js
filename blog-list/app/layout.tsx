@@ -1,4 +1,6 @@
 import Link from "next/link";
+import AuthSessionProvider from "./components/SessionProvider";
+import NavBar from "./components/NavBar";
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -7,13 +9,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <nav>
-          <Link href='/'>Home</Link>{' | '}
-          <Link href='/users'>Users</Link>{' | '}
-          <Link href='/blogs'>Blogs</Link>{' | '}
-          <Link href='/blogs/new'>Create Blog</Link>
-        </nav>
-        {children}
+        <AuthSessionProvider>
+          <NavBar/>
+          {children}
+        </AuthSessionProvider>
       </body>
     </html>
   );
