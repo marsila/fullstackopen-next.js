@@ -12,3 +12,9 @@ export const getUserWithBlogs = async(username:string) => {
         with : {blogs:true}
     })
 }
+
+export const checkUsernameExist = async(username:string) => {
+    return db.query.users.findFirst({
+        where:eq(users.username, username)
+    })
+}
