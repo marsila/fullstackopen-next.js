@@ -14,7 +14,8 @@ export type BlogFormState = {
         title:string;
         author:string;
         url:string;
-    }
+    };
+    success:boolean
 }
 export const createBlog = async( prevState: BlogFormState,formData :FormData) => {
     const session = await auth()
@@ -32,13 +33,13 @@ export const createBlog = async( prevState: BlogFormState,formData :FormData) =>
     
     if(!url || url.length < 5){errors.url ="URL must be at least 5 characters long"}
 
-    if(Object.keys(errors).length>0){
-        return{errors,values:{title,author,url}}
+    if (errors.title || errors.author || errors.url){
+        return{errors,values:{title,author,url},success:false}
     }
 
     await addBlog(title,author,url)
     revalidatePath('/blogs')
-    redirect('/blogs')
+    return{errors:{title: '', author: '', url: '' }, values: { title: '', author: '', url: ''},success: true}
 }
 
 export const increaseLikes = async(formData: FormData) => {
