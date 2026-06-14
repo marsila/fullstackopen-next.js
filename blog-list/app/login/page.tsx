@@ -23,7 +23,7 @@ export default function LoginPage() {
         }
     }
     return(
-        <div>
+        <div className="form-container">
             <h2>Login</h2>
             {error && <p style= {{color: 'red'}}>{error}</p>}
             <form onSubmit={handleSubmit}>
@@ -39,7 +39,7 @@ export default function LoginPage() {
                         <input type="password" name="password" id="password" required/>
                     </label>
                 </div>
-                <button type="submit">Login</button>
+                <button type="submit" className="submit-btn">Login</button>
             </form>
         </div>
     )

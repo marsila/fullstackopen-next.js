@@ -11,7 +11,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="min-h-screen bg-background text-foreground m-4">
+      <body className="min-h-screen bg-gray-50 text-foreground font-medium m-4">
         <AuthSessionProvider>
           <NotificationProvider>
             <NavBar/>

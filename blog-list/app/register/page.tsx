@@ -9,7 +9,7 @@ export default function RegisterPage(){
     }
     const [state,formAction] = useActionState(registerUser,initialState)
     return(
-        <div>
+        <div className="form-container">
             <h2>Register</h2>
             <form action={formAction}>
                 <div>
@@ -41,7 +41,7 @@ export default function RegisterPage(){
                 <div>
                     {state?.errors?.password && <p style={{color:'red', fontWeight:'bold'}}>{state?.errors?.password}</p>}
                 </div>
-                <button type="submit">Register</button>
+                <button type="submit" className="submit-btn">Register</button>
             </form>
         </div>
     )

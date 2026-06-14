@@ -22,10 +22,10 @@ export default function NewBlog(){
     },[state, showNotification,router])
     
     return(
-        <div>
-            <h1>Create a new blog</h1>
-            <form action={formAction}>
-                <div>
+        <div className="form-container">
+            <h2>Create a new blog</h2>
+            <form action={formAction} className="m-2">
+                <div className="form-items">
                     <label htmlFor="title">
                         Title <input type="text" name="title" id="title"  required defaultValue={state?.values?.title} />
                     </label>
@@ -50,7 +50,7 @@ export default function NewBlog(){
                     {state?.errors?.url && <p style={{color:'red', fontWeight:'bold'}}>{state.errors.url}</p>}
                 </div>
                 <div>
-                    <button type="submit">Create</button>
+                    <button type="submit" className="submit-btn">Create</button>
                 </div>
             </form>
         </div>
