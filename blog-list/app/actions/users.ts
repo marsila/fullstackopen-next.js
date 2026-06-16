@@ -53,7 +53,8 @@ export const registerUser = async (
     errors.password = "Passwords do not match.";
   }
 
-  if (Object.keys(errors).length > 0) {
+  const hasErrors = Object.values(errors).some((error) => error !== "")
+  if (hasErrors) {
     return { errors, values: { username, name } };
   }
 
