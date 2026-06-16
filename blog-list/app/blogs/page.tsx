@@ -1,5 +1,6 @@
 import { getBlogs } from "../services/blogs";
 import Link from "next/link";
+
 export default async function Blogs({
   searchParams,
 }: {

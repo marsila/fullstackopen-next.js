@@ -45,9 +45,19 @@ body {
   .blog-title {
     @apply text-base font-semibold text-gray-700 hover:text-gray-500
   }
+  .me-page {
+    @apply flex-col items-baseline  border-gray-900/10 rounded-sm shadow-md m-4 
+     p-3 w-2xl
+  }
+  .me-section{
+    @apply flex items-baseline 
+  }
 }
 
 @layer base{
+  h1{
+    @apply font-bold text-green-950 text-2xl py-3
+  }
   h2 {
     @apply text-base/7 font-semibold text-gray-700
   }

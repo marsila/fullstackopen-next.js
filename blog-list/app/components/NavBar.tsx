@@ -12,7 +12,12 @@ export default function NavBar() {
           <Link href="/" className="hover:bg-black p-2 rounded-2xl">Home</Link>
         <Link href="/users" className="hover:bg-black p-2 rounded-2xl">Users</Link>
         <Link href="/blogs" className="hover:bg-black p-2 rounded-2xl">Blogs</Link>
-        {session && <Link href="/blogs/new" className="hover:bg-black p-2 rounded-2xl">Create Blog</Link>}
+        {session && (
+          <>
+            <Link href="/blogs/new" className="hover:bg-black p-2 rounded-2xl">Create Blog</Link>
+            <Link href="/me" className="hover:bg-black p-2 rounded-2xl text-pink-500">Me</Link>
+          </>          
+        )}
         </div>
         
         {session ? (
