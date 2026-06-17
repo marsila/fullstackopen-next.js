@@ -36,6 +36,13 @@
       "when": 1781548414632,
       "tag": "0004_simple_pet_avengers",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1781687756950,
+      "tag": "0005_rich_may_parker",
+      "breakpoints": true
     }
   ]
 }

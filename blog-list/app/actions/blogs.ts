@@ -3,6 +3,8 @@ import {redirect} from 'next/navigation'
 import { revalidatePath } from 'next/cache'
 import { addBlog, updateBlog } from '../services/blogs'
 import { auth } from '../auth'
+import { addToReadBlog, isInReadingList } from '../services/readingList'
+import { getCurrentUser } from '../services/sessions'
 
 export type BlogFormState = {
     errors:{
@@ -50,4 +52,19 @@ export const increaseLikes = async(formData: FormData) => {
     await updateBlog(id)
     revalidatePath(`/blogs/${id}`);
     revalidatePath('/blogs');
+}
+
+export const addToReadingList = async(formData:FormData)=>{
+    const user = await getCurrentUser()
+    if(!user?.id) throw new Error('Unuthorized')
+    const blogId = Number(formData.get('blogId'))
+    if(! blogId){
+        throw new Error("Inavalid ID provider")
+    }
+
+    const alreadyAdded = await isInReadingList(user?.id, blogId);
+if (!alreadyAdded) {
+        await addToReadBlog(user.id,blogId)
+    }
+    revalidatePath(`/blogs/${blogId}`)
 }

@@ -1,26 +1,63 @@
-import { increaseLikes } from "@/app/actions/blogs";
+import { addToReadingList, increaseLikes } from "@/app/actions/blogs";
 import { getBlogById } from "@/app/services/blogs";
 import { notFound } from "next/navigation";
+import Link from "next/link";
+import { getCurrentUser } from "@/app/services/sessions";
+import { isInReadingList } from "@/app/services/readingList";
 
-export default async function BlogPage({params} : {params:Promise<{id?:string}>}){
-    const {id} = await params
-    if (isNaN(Number(id))) {
-    notFound(); 
+export default async function BlogPage({
+  params,
+}: {
+  params: Promise<{ id?: string }>;
+}) {
+  const { id } = await params;
+  if (isNaN(Number(id))) {
+    notFound();
   }
-    const blog = await getBlogById(Number(id))
-    if(!blog){
-        notFound()
-    }
-    return(
-        <div className="m-3 flex flex-col space-y-1 font-semibold text-gray-700">
-            <p><i className="text-blue-900 font-semibold pr-2">title:</i>{blog.title}</p>
-            <p><i className="text-blue-900 font-semibold pr-2">author:</i>{blog.author}</p>
-            <p><i className="text-blue-900 font-semibold pr-2">url:</i>{blog.url}</p>
-            <p><i className="text-blue-900 font-semibold pr-2">likes:</i>{blog.likes}</p>
-            <form action={increaseLikes}>
-                <input type="hidden" name="id" value={blog.id}/>
-                <button type="submit" className="rounded-md bg-blue-500 text-blue-50 px-4 py-1">Like</button>
-            </form>
+  const blog = await getBlogById(Number(id));
+  if (!blog) {
+    notFound();
+  }
+
+  const user = await getCurrentUser();
+  const inList = await isInReadingList(Number(user?.id), blog.id);
+  return (
+    <div className="flex justify-center">
+      <div className="container space-y-4">
+        <h1> {blog.title}</h1>
+        <p> by {blog.author}</p>
+        <Link href={blog.url} className="text-blue-900 font-semibold my-5">
+          {blog.url}
+        </Link>
+        <div className="flex justify-baseline space-x-3 my-4">
+          likes: {blog.likes}
+          <form action={increaseLikes}>
+            <input type="hidden" name="id" value={blog.id} />
+            <button
+              type="submit"
+              className="rounded-md bg-blue-700 text-blue-50 px-4 py-1 mx-4"
+            >
+              Like
+            </button>
+          </form>
+          {user &&
+            (inList ? (
+              <span className="rounded-md bg-green-700 text-green-50 px-4 py-1">
+                Is added to the reading List
+              </span>
+            ) : (
+              <form action={addToReadingList}>
+                <input type="hidden" name="blogId" value={blog.id} />
+                <button
+                  type="submit"
+                  className="rounded-md bg-green-700 text-green-50 px-4 py-1"
+                >
+                  add to reading list
+                </button>
+              </form>
+            ))}
         </div>
-    )
+      </div>
+    </div>
+  );
 }

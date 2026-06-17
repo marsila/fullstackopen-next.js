@@ -45,7 +45,7 @@ body {
   .blog-title {
     @apply text-base font-semibold text-gray-700 hover:text-gray-500
   }
-  .me-page {
+  .container {
     @apply flex-col items-baseline  border-gray-900/10 rounded-sm shadow-md m-4 
      p-3 w-2xl
   }

@@ -11,7 +11,7 @@ export default async function MyPage() {
 
   return (
     <div className="flex justify-center">
-      <div className="me-page">
+      <div className="container">
         <div>
           <h1>My profile</h1>
           <div>

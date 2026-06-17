@@ -1,12 +1,9 @@
 "use server";
 
-import { db } from "@/db";
-import { users } from "@/db/schema";
 import bcrypt from "bcryptjs";
 import { redirect } from "next/navigation";
-import { checkUsernameExist } from "../services/users";
+import { addToken, addUser, checkUsernameExist } from "../services/users";
 import { getCurrentUser } from "../services/sessions";
-import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
 export type RegisterFormState = {
@@ -58,7 +55,7 @@ export const registerUser = async (
     return { errors, values: { username, name } };
   }
 
-  await db.insert(users).values({ username, name, passwordHash });
+  await addUser(username,name,passwordHash)
   redirect("/login");
 };
 
@@ -68,11 +65,7 @@ export const createToken = async () => {
     throw new Error('Unauthorized')
   }
   const token = crypto.randomUUID()
-    await db
-      .update(users)
-      .set({ token: String(token) })
-      .where(eq(users.id, user?.id));  
-
+    await addToken(user.id,token)
   revalidatePath('/me')
 
 };
