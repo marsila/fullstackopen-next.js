@@ -1,4 +1,5 @@
-import { addToReadingList, increaseLikes } from "@/app/actions/blogs";
+import { increaseLikes } from "@/app/actions/blogs";
+import { addToReadingList } from "@/app/actions/readingList"
 import { getBlogById } from "@/app/services/blogs";
 import { notFound } from "next/navigation";
 import Link from "next/link";
