@@ -1,5 +1,5 @@
 import { db } from "@/db";
-import { blogs, readings } from "@/db/schema";
+import {  readings } from "@/db/schema";
 import { eq ,and} from "drizzle-orm";
 
 export const addToReadBlog = async (userId:number, blogId:number)=>{

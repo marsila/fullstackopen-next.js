@@ -15,12 +15,15 @@ export default async function userPage({params} :{params:Promise<{username?:stri
     }
     return(
         <div>
-            <h3>{user.name}</h3>
+            <h1>{user.name}</h1>
             <p>User Name : {user.username}</p>
-            <h3>Blogs</h3>
-            <ul>
+            <h2>Blogs</h2>
+            <ul className="flex-col space-y-2">
                 {user.blogs.map(blog => (
-                    <li key={blog.id}><Link href={`/blogs/${blog.id}`}>{blog.title}</Link>{' '}By /{blog.author}/ - has {blog.likes} likes</li>
+                    <li key={blog.id}>
+                        <Link href={`/blogs/${blog.id}`} className="blog-title">{blog.title}</Link>
+                        {' '}By <span className="text-blue-900 font-semibold">{blog.author}</span> has {blog.likes} likes
+                    </li>
                 ))}
             </ul>
         </div>
