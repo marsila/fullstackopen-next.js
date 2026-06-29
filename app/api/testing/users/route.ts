@@ -1,12 +1,11 @@
 import { addUser } from "@/app/services/users";
-import { db } from "@/db";
 import bcrypt from "bcryptjs";
 import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (request: NextRequest) => {
-  if (process.env.NODE_ENV === "production") {
+  if (process.env.NODE_ENV === "production" && process.env.NEXT_PUBLIC_APP_ENV !== "test") {
     return NextResponse.json(
-      { error: "This endpoint is not available in production" },
+      { error: "This endpoint is not available in production/creating user" },
       { status: 403 },
     );
   }
